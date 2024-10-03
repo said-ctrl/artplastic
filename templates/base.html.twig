@@ -1,17 +1,60 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/zoom.js/0.0.1/zoom.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/zoom.js/0.0.1/zoom.min.js"></script>
+		<script src="https://cdn.tailwindcss.com"></script>
+		<link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet"/>
+		<link href="https://unpkg.com/flowbite@1.4.7/dist/flowbite.min.css" rel="stylesheet">
+		<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/controls/OrbitControls.js"></script>
+
+
+		{% block javascripts %}
+			{% block importmap %}{% endblock %}
+		{% endblock %}
+
+
+		<body class="bg-gray-900 text-white text-2xl">
+
+			<nav class="bg-gray-800 p-4">
+				<div class="container mx-auto flex justify-between items-center">
+					<a href="{{ path('app_menu') }}" class="text-2xl font-bold ">
+						<img src="{{asset('images/logoart.png')}}" class="h-16 w-16" alt="logo">
+					</a>
+					<div class="flex items-center space-x-4">
+						<a href="{{ path('app_menu') }}" class="hover:text-green-400">Accueil</a>
+						<a href="{{ path('app_produits') }}" class="hover:text-green-400">Produits</a>
+						{% if app.user %}
+							<a href="{{ path('app_logout') }}" class="hover:text-green-400">deconnexion</a>
+
+
+						{% else %}
+
+							<a href="{{ path('app_register') }}" class="hover:text-green-400">Inscription</a>
+							<a href="{{ path('app_login') }}" class="hover:text-green-400">Connexion</a>
+						{% endif %}
+						<a href="{{ path('cart_show') }}" class="hover:text-green-400">Panier</a>
+					</div>
+				</div>
+			</nav>
+
+			{% block body %}{% endblock %}
+
+
+			<footer class="bg-gray-800 text-center p-4 mt-10">
+				<p>&copy; 2024 Art des Déchets. Tous droits réservés.</p>
+			</footer>
+
+		</body>
+	</head>
 </html>

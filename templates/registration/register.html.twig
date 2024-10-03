@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+     <main class="bg-gradient-to-r from-green-400 to-blue-500 p-6">
+        <h1 class="text-4xl font-bold text-center">Inscription</h1>
+        <p class="text-lg text-center mt-2">Pas encore inscris ? Qu'attendez-vous!</p>
+    </main>
+
+    <div class="max-w-md mx-auto bg-gray-800 p-6 rounded-lg shadow-lg">
+    {{ form_errors(registrationForm) }}
+
+    {{ form_start(registrationForm) }}
+        <div class="mb-4">
+            {{ form_row(registrationForm.email, {
+                'attr': {'class': 'w-full p-2 bg-gray-700 border border-gray-600 rounded text-white placeholder-gray-400'},
+                'label_attr': {'class': 'text-sm font-semibold'}
+            }) }}
+        </div>
+        
+        <div class="mb-4">
+            {{ form_row(registrationForm.plainPassword, {
+                'label': 'Mot de passe',
+                'attr': {'class': 'w-full p-2 bg-gray-700 border border-gray-600 rounded text-white placeholder-gray-400'}
+            }) }}
+        </div>
+        
+        <div class="flex items-center mb-4">
+            {{ form_row(registrationForm.agreeTerms, {
+                'attr': {'class': 'mr-2'}
+            }) }}
+            <label class="text-sm text-gray-300">J'accepte les termes et conditions</label>
+        </div>
+
+        <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded mt-4">S'inscrire</button>
+    {{ form_end(registrationForm) }}
+</div>
+
+{% endblock %}
+
+

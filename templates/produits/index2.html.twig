@@ -1,0 +1,171 @@
+{% extends 'base.html.twig' %}
+{% block title %}Mon site de com
+{% endblock %}
+
+{% block body %}
+	<header class="bg-gradient-to-r from-green-400 to-blue-500 p-6">
+		<h1 class="text-4xl font-bold text-center">{{prod.nom}}</h1>
+		<p class=" text-center text-2xl mt-2">Dépechez-vous les déchets transformés disparaissent très vite!</p>
+		<a href="{{ path('app_produits') }}" class="text-xl hover:text-green-400">
+			Retour</a>
+	</header>
+
+	<style>
+		.art-details {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 20px;
+			border: 1px solid #ddd;
+			border-radius: 8px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			background-color: #111827;
+		}
+
+		.art-title {
+			font-size: 2em;
+			margin-bottom: 20px;
+			text-align: center;
+		}
+
+		.art-content {
+			display: flex;
+			align-items: flex-start;
+		}
+
+		.art-image {
+			max-width: 300px;
+			margin-right: 20px;
+			border-radius: 8px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		}
+
+		.art-description {
+			flex: 1;
+		}
+
+		.art-price {
+			font-size: 1.2em;
+			font-weight: bold;
+			margin-top: 20px;
+		}
+
+		.buy-button {
+			display: inline-block;
+			padding: 10px 20px;
+			background-color: #28a745;
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: background-color 0.3s;
+		}
+
+		.buy-button:hover {
+			background-color: #218838;
+		}
+
+		.modal {
+			display: none;
+			position: fixed;
+			z-index: 1;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			overflow: auto;
+			background-color: rgba(0, 0, 0, 0.8);
+		}
+
+		.modal-content {
+			margin: auto;
+			display: block;
+			max-width: 90%;
+			max-height: 80%;
+		}
+
+		.close {
+			position: absolute;
+			top: 20px;
+			right: 35px;
+			color: red;
+			font-size: 40px;
+			font-weight: bold;
+		}
+
+		.art-image-container {
+			overflow: hidden; /* Cache la partie de l'image qui dépasse */
+			position: relative; /* Position relative pour le positionnement absolu de l'image zoomée */
+		}
+
+		.art-image {
+			transition: transform 0.5s ease; /* Animation douce pour le zoom */
+		}
+
+		.art-image-container:hover .art-image {
+			transform: scale(1.2); /* Ajustez le facteur de zoom selon vos besoins */
+		}
+		.rotate-3d {
+			transform: rotateX(45deg) rotateY(45deg);
+		}
+        <style>
+
+		.ection {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			margin: 0;
+			background-color: #f0f0f0;
+		}
+		.container {
+			perspective: 1000px;
+		}
+	
+	
+	</style>
+
+
+	<section class="flex">
+
+		<div class="art-details">
+			<div class="art-container">
+				<div class="art-image-container"><div class="flex">
+					<img src="{{ asset('images/' ~ prod.image) }}" alt="{{prod.nom}}" class="art-image">
+                    <a href="{{path('app_prod3d', {id: prod.id})}}" class="mx-5 text-xl hover:text-green-400">Vue animé</a></div>
+					<h1 class="art-title">{{prod.nom}}</h1>
+					<p class="art-description">{{prod.description}}
+
+						Ceci est une description de l'œuvre d'art. Elle peut inclure des détails sur l'artiste, l'inspiration derrière l'œuvre, et d'autres informations pertinentes.</p>
+				</p>
+				<p class="art-price">Prix: €{{prod.prix}}</p>
+				<form action="{{ path('cart_add', { id: prod.id }) }}" method="POST">
+					<button class="buy-button w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded">Acheter</button>
+				</form>
+
+
+				<div id="modal" class="modal" style="display:none;">
+					<span class="close" onclick="closeModal()">&times;</span>
+					<img class="modal-content" id="modal-image">
+				
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</section>
+
+<script>
+	const artImage = document.querySelector('.art-image');
+const modal = document.getElementById('modal');
+const modalImg = document.getElementById('modal-image');
+
+artImage.onclick = function () {
+modal.style.display = "block";
+modalImg.src = this.src; // Met à jour l'image de la modale avec celle de l'œuvre d'art
+}
+
+function closeModal() {
+modal.style.display = "none";
+}
+</script>{% endblock %}

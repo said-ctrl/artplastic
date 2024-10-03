@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+	<header class="bg-gradient-to-r from-green-400 to-blue-500 p-6">
+		<h1 class="text-4xl font-bold text-center">Nos Produits</h1>
+		<p class="text-lg text-center mt-2">Dépechez-vous les déchets transformés disparaissent très vite!</p>
+	</header>
+	
+
+
+	<div class="flex flex-wrap justify-center">
+		{% for produits in produit %}
+
+			<div class="max-w-sm mx-auto bg-gray-800 p-6 rounded-lg shadow-lg">
+				<div class="mb-4 group">
+					<a href="{{path('app_prod', {id: produits.id})}}">
+
+						<img src="{{ asset('images/' ~ produits.image) }}" alt="{{ produits.nom }}" class="w-full h-48 object-cover rounded-lg transform transition duration-500 group-hover:scale-110 cursor-pointer"></a>
+				</div>
+
+				<div class="mb-4">
+					<h2 class="text-xl font-semibold text-white">{{ produits.nom }}</h2>
+				</div>
+				<div class="mb-4"></div>
+				<div class="mb-4">
+					<span class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">Éco-responsable</span>
+
+			</div>
+		</div>
+				{% endfor %}
+
+	</div>
+
+
+</html>{% endblock %}

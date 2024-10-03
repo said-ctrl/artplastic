@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}my shps
+{% endblock %}
+
+{% block body %}
+
+	<header class="bg-gradient-to-r from-green-400 to-blue-500 p-6">
+		<h1 class="text-4xl font-bold text-center">Votre Panier</h1>
+		<p class="text-lg text-center mt-2">33 % de nos recettes sont reversées aux petites associations</p>
+	</header>
+
+
+	<section class="mt-10">
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+			{% for produitId, quantity in cart %}
+				{% set produit = productById[produitId] %}
+				<div class="bg-gray-800 p-4 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+					<img src="{{ asset('images/' ~ produit.image) }}" alt="{{ produit.nom }}" class="rounded-lg mb-2 w-full h-48 object-cover">
+					<h3 class="font-bold text-white text-xl">{{ produit.nom }}</h3>
+					<p class="text-white">{{ produit.description }}</p>
+					<p class="font-semibold text-white">Prix:
+						{{ produit.prix }}
+						€</p>
+					<p class="text-white">Quantité:
+						{{ quantity }}</p>
+					<form action="{{ path('cart_add', { id: produitId }) }}" method="POST">
+						<button type="submit" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded mt-2">Ajouter au Panier</button>
+					</form>
+					<form action="{{ path('cart_mov', { id: produitId }) }}" method="POST">
+						<button type="submit" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded mt-2">Retirer du Panier</button>
+					</form>
+				</div>
+			{% endfor %}
+		</div>
+	</section>
+
+	<ul class="mt-4 text-center">
+
+		{% for produitId, quantity in cart %}
+			{% set produit = productById[produitId] %}
+
+
+			<li class="text-white">Produit
+				{{ produitId }}
+				- Quantité :
+				{{ quantity }}
+			</li>
+		</ul>
+	{% endfor %}
+
+
+{% endblock %}
