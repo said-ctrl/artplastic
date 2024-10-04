@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Produits;
+use App\Repository\ProduitsRepository;
 use App\Services\CarteServices;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,7 +14,10 @@ use Symfony\Component\Routing\Attribute\Route;
 class CartController extends AbstractController
 {
     private $cartService;
-    public function __construct( CarteServices $cartService){
+    public function __construct( 
+        CarteServices $cartService,
+        private readonly ProduitsRepository $produitsRepository,
+        ){
         $this->cartService = $cartService;
 
     }
@@ -31,6 +35,9 @@ public function showCart(EntityManagerInterface $entitymanager): Response
     // Récupérer le contenu du panier
     $cart = $this->cartService->getCart(); 
     $products = [];
+    $total = 0;
+    $quantity = 0;
+    $productIds = 0;
 
     // Récupérer les détails des produits à partir des IDs
     if (!empty($cart)) {
@@ -38,15 +45,20 @@ public function showCart(EntityManagerInterface $entitymanager): Response
         $products = $entitymanager->getRepository(Produits::class)->findBy(['id' => $productIds]);
     }
     $productById = [];
-    foreach ($products as $product){
-        $productById[$product->getId()] =  $product;
-        $productById[$product->getPrix()] = $product;
+    foreach ($cart as $product => $quantity){
+        $prod = $this->produitsRepository->find($product);
+        $total  +=  $prod->getprix() * $quantity;
     }
-
+    
     return $this->render('cart/index.html.twig', [
         'cart' => $cart,
         'productById' => $productById,
-        // dd($product)
+        "total"=>$total,
+        'products' => $products,
+        'quantity' => $quantity,
+        'produitIds' => $productIds,
+        
+        // dd($products)
     ]);
 }
 

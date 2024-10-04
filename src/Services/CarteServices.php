@@ -18,9 +18,10 @@ class CarteServices implements CarteServicesInterface
     {
         $cart = $this->session->get('cart', []);
         if (!isset($cart[$produitsId])) {
-            $cart[$produitsId] = 0;
+            $cart[$produitsId] = 1;
+        } else {
+            $cart[$produitsId]++;
         }
-        $cart[$produitsId]++;
         $this->session->set('cart', $cart);
     }
     public function removeProduits($produitsId)
@@ -39,16 +40,16 @@ class CarteServices implements CarteServicesInterface
         return $this->session->get('cart', []);
     }
     public function getTotal()
-{
-    $cart = $this->getCart();
-    $total = 0;
+    {
+        $cart = $this->getCart();
+        $total = 0;
 
-    foreach ($cart as $produitsId => $quantity) {
-        if (isset($this->products[$produitsId])) {
-            // $total += $this->products[$produitsId] * $quantity;
+        foreach ($cart as $produitsId => $quantity) {
+            if (isset($this->products[$produitsId])) {
+                // $total += $this->products[$produitsId] * $quantity;
+            }
         }
-    }
 
-    return $total;
-}
+        return $total;
+    }
 }

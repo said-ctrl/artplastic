@@ -6,13 +6,12 @@
 		<h1 class="text-4xl font-bold text-center">Nos Produits</h1>
 		<p class="text-lg text-center mt-2">Dépechez-vous les déchets transformés disparaissent très vite!</p>
 	</header>
-	
 
 
-	<div class="flex flex-wrap justify-center">
+	<div class="flex flex-wrap gap-1">
 		{% for produits in produit %}
 
-			<div class="max-w-sm mx-auto bg-gray-800 p-6 rounded-lg shadow-lg">
+			<div class="max-w-sm  bg-gray-800 p-3 mb-3 rounded-lg shadow-lg">
 				<div class="mb-4 group">
 					<a href="{{path('app_prod', {id: produits.id})}}">
 
@@ -26,9 +25,9 @@
 				<div class="mb-4">
 					<span class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">Éco-responsable</span>
 
+				</div>
 			</div>
-		</div>
-				{% endfor %}
+		{% endfor %}
 
 	</div>
 
