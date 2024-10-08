@@ -65,37 +65,48 @@
 					{% endfor %}
 					<li class="flex justify-between items-center text-white mr-4">
 						<span>Montant</span>
-						<span>{{ total }}
+						<span>{{ subtotal }}
 							€</span>
 					</li>
 					<li class="flex justify-between items-center text-white mr-4">
-						<span>Frais de Ports</span>
-						<span>
-							€</span>
+						<span>reduction</span>
+						{% if codePromo %}
+							<p>Code Promo:
+								{{ codePromo }}</p>
+							<p>Réduction:
+								{{ reduction }}%</p>
+						{% endif %}
+
 					</li>
 					<li class="flex justify-between items-center text-white font-bold mr-4">
 						<span>Total</span>
-						<span>{{ total }}
+						<span>{{ subtotal }}
 							€</span>
 					</li>
+					{% if codePromo %}
+						<li class="flex justify-between items-center text-white font-bold mr-4">
+							<span>total apres reduction</span>
+							<span> {{ total  }}
+								€</span>
+						</li>
+					{% endif %}
 				</ul>
-				{# <div class="mt-4">
-											<input type="text" placeholder="Promo Code" class="w-full p-2 rounded mb-4">
-										<button class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded w-full">Validé Promo</button>
-												</div> #}
-				<div class="mt-4 mr-4">
-					<h3 class="text-white text-xl font-bold mb-2">Adresse de livraison</h3>
-					<input type="text" placeholder="Nom" class="w-full p-2 rounded mb-2">
-					<input type="text" placeholder="Adresse" class="w-full p-2 rounded mb-2">
-					<input type="text" placeholder="Ville" class="w-full p-2 rounded mb-2">
-					<input
-					type="text" placeholder="Code Postal" class="w-full p-2 rounded mb-4">
-					{# <button class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded w-full mb-2">Annulé</button> #}
-					<button class="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded w-full">Validé</button>
-				</div>
+			</ul>
+
+
+			<div class="mt-4 mr-4">
+				<h3 class="text-white text-xl font-bold mb-2">Adresse de livraison</h3>
+				<input type="text" placeholder="Nom" class="w-full p-2 rounded mb-2 text-black">
+				<input type="text" placeholder="Adresse" class="w-full p-2 rounded mb-2 text-black">
+				<input type="text" placeholder="Ville" class="w-full p-2 rounded mb-2">
+				<input type="text" placeholder="Code Postal" class="w-full p-2 rounded mb-4">
+				<form method="post" action="{{ path('cart_show') }}">
+					<input type="text" name="code_promo" placeholder="Code Promo" class="w-full p-2 rounded mb-4 text-black">
+					<button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded w-full">Valider Promo</button>
+				</form>
+				{# <button class="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded w-full">Valider Promo</button> #}
 			</div>
 		</div>
-	</section>
-
-
+	</div>
+</section>
 {% endblock %}

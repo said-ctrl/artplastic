@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\CodePromo;
 use App\Entity\Produits;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -47,6 +48,10 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToRoute('Vers site', 'fas fa-list', 'app_menu');
         yield MenuItem::linkToCrud('Produits', 'fas fa-list', Produits::class);
         yield MenuItem::linkToCrud('User', 'fas fa-list', User::class);
+        yield MenuItem::linkToCrud('CodePromo', 'fas fa-list', CodePromo::class);
+
+
+
 
     }
 }

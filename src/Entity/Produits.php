@@ -26,6 +26,11 @@ class Produits
     #[ORM\Column(type: Types::TEXT)]
     private ?string $image = null;
 
+    #[ORM\ManyToOne(inversedBy: 'produit')]
+    private ?CodePromo $codePromo = null;
+
+  
+
     public function getId(): ?int
     {
         return $this->id;
@@ -78,5 +83,18 @@ class Produits
 
         return $this;
     }
-    
+
+    public function getCodePromo(): ?CodePromo
+    {
+        return $this->codePromo;
+    }
+
+    public function setCodePromo(?CodePromo $codePromo): static
+    {
+        $this->codePromo = $codePromo;
+
+        return $this;
+    }
+
+  
 }

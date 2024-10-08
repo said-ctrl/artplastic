@@ -2,16 +2,16 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\User;
+use App\Entity\CodePromo;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\PercentField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class UserCrudController extends AbstractCrudController
+class CodePromoCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return User::class;
+        return CodePromo::class;
     }
 
     
@@ -19,9 +19,9 @@ class UserCrudController extends AbstractCrudController
     {
         return [
             // IdField::new('id'),
-            TextField::new('email'),
-            ArrayField::new('roles'),
+            TextField::new('code_promo'),
+            PercentField::new('reduction'),
         ];
     }
-
+    
 }
