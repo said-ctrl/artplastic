@@ -107,9 +107,7 @@
 		.rotate-3d {
 			transform: rotateX(45deg) rotateY(45deg);
 		}
-        <style>
-
-		.ection {
+		<style > .ection {
 			display: flex;
 			justify-content: center;
 			align-items: center;
@@ -120,44 +118,60 @@
 		.container {
 			perspective: 1000px;
 		}
-	
-	
 	</style>
-	
 
-
-	<section class="flex ection">
-
+	<section class="flex section">
 		<div class="art-details">
 			<div class="art-container">
-				<div class="art-image-container"><div class="flex">
-					<img src="{{ asset('images/' ~ prod.image) }}" alt="{{prod.nom}}" class="art-image">
-                    <a href="{{path('app_prod3d', {id: prod.id})}}" class="mx-5 text-xl hover:text-pink-400">Vue animé</a></div>
-					<h1 class="art-title">{{prod.nom}}</h1>
-					<p class="art-description">{{prod.description}}
-
-						Ceci est une description de l'œuvre d'art. Elle peut inclure des détails sur l'artiste, l'inspiration derrière l'œuvre, et d'autres informations pertinentes.</p>
-				</p>
-				<p class="art-price">Prix: €{{prod.prix}}</p>
-				<form action="{{ path('cart_add', { id: prod.id }) }}" method="POST">
-					<button class="buy-button w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded">Acheter</button>
-				</form>
-
-
-				<div id="modal" class="modal" style="display:none;">
-					<span class="close" onclick="closeModal()">&times;</span>
-					<img class="modal-content" id="modal-image">
-				
+				<div class="art-image-container">
+					<div class="flex">
+						<img src="{{ asset('images/' ~ prod.image) }}" alt="{{ prod.nom }}" class="art-image">
+						<a href="{{ path('app_prod3d', { id: prod.id }) }}" class="mx-5 text-xl hover:text-pink-400">Vue animée</a>
+					</div>
+					<h1 class="art-title">{{ prod.nom }}</h1>
+					<p class="art-description">{{ prod.description }}</p>
+					<p class="art-price">Prix: €{{ prod.prix }}</p>
+					<form action="{{ path('cart_add', { id: prod.id }) }}" method="POST">
+						<button class="buy-button w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded">Acheter</button>
+					</form>
 				</div>
-			</div>
-		</div>
-	</div>
+				<div id="modal" class="modal" style="display:none;">
+					<span class="close" onclick="closeModal()">×</span>
+					<img class="modal-content" id="modal-image">
+				</div>
+				<h2>Commentaires</h2>
+					{% for comment in prod.comments %}
+						<div class="commentaire">
+							<p>
+							
+								{% if comment.user and comment.user.email %}
+									<strong>{{ comment.user.email }}</strong>
+								{% else %}
+									<strong>Anonymous</strong>
+								{% endif %}
+								({{ comment.dateCreation|date('d/m/Y H:i') }})
+							</p>
+							<p>{{ comment.comments }}</p>
+						</div>
+					{% endfor %}
+
+					{# <p>Vous devez être connecté pour voir les commentaires.</p> #}
+				<h2>Ajouter un commentaire</h2>
+				{% if app.user %}
+					{{ form_start(form) }}
+					{{ form_widget(form) }}
+					<button type="submit" class="bg-blue-500 hover:bg-blue-600 text-black py-2 px-4 rounded">Ajouter</button>
+					{{ form_end(form) }}
+				{% else %}
+					{# <p>Vous devez être connecté pour ajouter un commentaire.</p> #}
+				{% endif %}
 
 
-</section>
+			</section>
 
-<script>
-	const artImage = document.querySelector('.art-image');
+
+			<script>
+				const artImage = document.querySelector('.art-image');
 const modal = document.getElementById('modal');
 const modalImg = document.getElementById('modal-image');
 
@@ -169,4 +183,5 @@ modalImg.src = this.src; // Met à jour l'image de la modale avec celle de l'œu
 function closeModal() {
 modal.style.display = "none";
 }
-</script>{% endblock %}
+			</script>
+		{% endblock %}

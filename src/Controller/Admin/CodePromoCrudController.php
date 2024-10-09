@@ -19,7 +19,7 @@ class CodePromoCrudController extends AbstractCrudController
     {
         return [
             // IdField::new('id'),
-            TextField::new('code_promo'),
+            TextField::new('codepromo'),
             PercentField::new('reduction'),
         ];
     }

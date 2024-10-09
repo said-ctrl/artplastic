@@ -90,4 +90,11 @@ class CodePromo
 
         return $this;
     }
+    public function __toString()
+    {
+        return $this->code_promo;
+    }
+
+
+    
 }

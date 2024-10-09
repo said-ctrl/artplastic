@@ -62,7 +62,7 @@ class CartController extends AbstractController
         if ($promotion) {
             $reduction = $promotion->getReduction(); // Supposons que la réduction est en pourcentage
             $total = number_format($subtotal - $subtotal * $reduction ,2,'.','',);
-            // dd($reduction);
+            // dd($session);
         }
         
 

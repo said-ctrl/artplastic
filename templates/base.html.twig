@@ -38,27 +38,27 @@
 						{% if app.user %}
 							{% if is_granted('ROLE_ADMIN') %}
 								<a href="{{ path('admin_dashboard') }}" class="hover:text-green-400">Tableau de bord Admin</a>
-								 {% endif %}
-								<a href="{{ path('app_logout') }}" class="hover:text-green-400">deconnexion</a>
-
-
-							{% else %}
-
-								<a href="{{ path('app_register') }}" class="hover:text-green-400">Inscription</a>
-								<a href="{{ path('app_login') }}" class="hover:text-green-400">Connexion</a>
 							{% endif %}
-							<a href="{{ path('cart_show') }}" class="hover:text-green-400">Panier</a>
-						</div>
+							<a href="{{ path('app_logout') }}" class="hover:text-green-400">deconnexion</a>
+							<a href="{{ path('app_profil') }}" class="hover:text-green-400">profil</a>
+
+
+						{% else %}
+
+							<a href="{{ path('app_register') }}" class="hover:text-green-400">Inscription</a>
+							<a href="{{ path('app_login') }}" class="hover:text-green-400">Connexion</a>
+						{% endif %}
+						<a href="{{ path('cart_show') }}" class="hover:text-green-400">Panier</a>
 					</div>
-				</nav>
+				</div>
+			</nav>
 
-				{% block body %}{% endblock %}
+			{% block body %}{% endblock %}
 
 
-				<footer class="bg-gray-800 text-center p-4 mt-10">
-					<p>&copy; 2024 Art des Déchets. Tous droits réservés.</p>
-				</footer>
-			</body>
+			<footer class="bg-gray-800 text-center p-4 mt-10">
+				<p>&copy; 2024 Art des Déchets. Tous droits réservés.</p>
+			</footer>
 		</body>
 	</head>
-</html>
+</html></body></head></html>

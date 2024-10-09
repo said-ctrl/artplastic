@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+{% block title %}Log in!
+{% endblock %}
+
+{% block body %}
+	<header class="bg-gradient-to-r from-green-400 to-blue-500 p-6">
+		<h1 class="text-4xl font-bold text-center">Mon Profil</h1>
+		<p class=" text-center text-2xl mt-2">Bienvenue sur votre Profil !</p>
+		<a href="{{ path('app_produits') }}" class="text-xl hover:text-red-400">
+			Retour</a>
+	</header>
+	<style>
+		section {
+			font-family: Arial, sans-serif;
+			background-color: #1a1a1a;
+			color: #fff;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			margin: 0;
+		}
+		.profile-card {
+			background: linear-gradient(135deg, #6e8efb, #a777e3);
+			border-radius: 15px;
+			padding: 20px;
+			box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+			width: 300px;
+			text-align: center;
+		}
+		.profile-card p {
+			margin: 10px 0;
+		}
+		.profile-card p span {
+			font-weight: bold;
+		}
+	</style>
+	<section>
+		<div class="profile-card">
+			<p>
+				<span>Email :</span>
+				{{ app.user.email }}</p>
+			<p>
+				<span>Photo :</span>
+				</p>
+             <img src="{{ asset('images/' ~ app.user.informationuser.photo  ) }}" alt="{{ app.user.informationuser.photo }}">   
+
+			<p>
+				<span>Nom :</span>
+				{{ app.user.informationuser.Nom }}</p>
+			<p>
+				<span>Prénom :</span>
+				{{ app.user.informationuser.prenom }}</p>
+			<p>
+				<span>Adresse :</span>
+				{{ app.user.informationuser.adresse }}</p>
+			<p>
+				<span>Code Postal :</span>
+				{{ app.user.informationuser.codepostal }}</p>
+			<p>
+				<span>Ville :</span>
+				{{ app.user.informationuser.ville }}</p>
+		</div>
+	</section>
+
+
+{% endblock %}
