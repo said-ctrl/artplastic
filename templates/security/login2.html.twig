@@ -42,26 +42,58 @@
 				{{ app.user.email }}</p>
 			<p>
 				<span>Photo :</span>
-				</p>
-             <img src="{{ asset('images/' ~ app.user.informationuser.photo  ) }}" alt="{{ app.user.informationuser.photo }}">   
+				{% if app.user.informationuser and app.user.informationuser.photo %}
+					<img src="{{ asset('images/profil/' ~ app.user.informationuser.photo) }}" alt="{{ app.user.informationuser.photo }}">
+				{% else %}
+					<img src="{{ asset('images/logobase.png') }}" alt="logobase">
+				{% endif %}
+			</p>
 
+		
 			<p>
 				<span>Nom :</span>
-				{{ app.user.informationuser.Nom }}</p>
+				{% if app.user.informationuser and app.user.informationuser.Nom %}
+					{{ app.user.informationuser.Nom }}
+				{% else %}
+					<input class="text-black" type="text" name="Nom" placeholder="Nom">
+				{% endif %}
+			</p>
 			<p>
 				<span>Prénom :</span>
-				{{ app.user.informationuser.prenom }}</p>
+				{% if app.user.informationuser and app.user.informationuser.prenom %}
+					{{ app.user.informationuser.prenom }}
+				{% else %}
+					<input class="text-black" class="text-black" type="text" name="prenom" placeholder="Prénom">
+				{% endif %}
+			</p>
 			<p>
 				<span>Adresse :</span>
-				{{ app.user.informationuser.adresse }}</p>
+				{% if app.user.informationuser and app.user.informationuser.adresse %}
+					{{ app.user.informationuser.adresse }}
+				{% else %}
+					<input class="text-black" type="text" name="adresse" placeholder="Adresse">
+				{% endif %}
+			</p>
 			<p>
 				<span>Code Postal :</span>
-				{{ app.user.informationuser.codepostal }}</p>
+				{% if app.user.informationuser and app.user.informationuser.codepostal %}
+					{{ app.user.informationuser.codepostal }}
+				{% else %}
+					<input class="text-black" type="text" name="codepostal" placeholder="Code Postal">
+				{% endif %}
+			</p>
 			<p>
 				<span>Ville :</span>
-				{{ app.user.informationuser.ville }}</p>
-		</div>
-	</section>
+				{% if app.user.informationuser and app.user.informationuser.ville %}
+					{{ app.user.informationuser.ville }}
+				{% else %}
+					<input class="text-black" type="text" name="ville" placeholder="Ville">
+				{% endif %}
+			</p>
+			<a href="{{path('app_modifie_profil', {id: app.user.id})}}">Modifier</a>
+
+		</section>
+		
 
 
-{% endblock %}
+	{% endblock %}

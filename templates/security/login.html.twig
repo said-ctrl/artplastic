@@ -16,10 +16,10 @@
 				<a href="{{ path('app_logout') }}">Logout</a>
 			</div>
 		{% endif %}
-         <main class="bg-gradient-to-r from-green-400 to-blue-500 p-6">
-        <h1 class="text-4xl font-bold text-center">Connexion</h1>
-        <p class="text-lg text-center mt-2">Connectez-Vous pour en savoir plus</p>
-    </main>
+		<main class="bg-gradient-to-r from-green-400 to-blue-500 p-6">
+			<h1 class="text-4xl font-bold text-center">Connexion</h1>
+			<p class="text-lg text-center mt-2">Connectez-Vous pour en savoir plus</p>
+		</main>
 
 		<div class="max-w-md mx-auto bg-gray-800 p-6 rounded-lg shadow-lg">
 			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
@@ -36,7 +36,7 @@
 				<input type="checkbox" name="_remember_me" class="mr-2">
 				<label class="text-sm text-gray-300">Se souvenir de moi</label>
 			</div>
-
+			<a href="{{ path('app_forgot') }}" class=" bg-green-500 hover:bg-green-600 text-white py-2 rounded mt-4">Mot de passe oublié</a>
 			<button class="w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded mt-4" type="submit">
 				Sign in
 			</button>

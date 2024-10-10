@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ModifieProfilController!
+{% endblock %}
+{% block body %}
+
+{{ form_start(form) }}
+
+
+
+
+<div class="mb-4">
+    <label for="Nom" class="block text-gray-700 text-sm font-bold mb-2">Nom :</label>
+    {{ form_widget(form.Nom, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'}}) }}
+</div>
+<div class="mb-4">
+    <label for="Prenom" class="block text-gray-700 text-sm font-bold mb-2">Prénom :</label>
+    {{ form_widget(form.Prenom, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'}}) }}
+</div>
+<div class="mb-4">
+    <label for="Adresse" class="block text-gray-700 text-sm font-bold mb-2">Adresse :</label>
+    {{ form_widget(form.Adresse, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'}}) }}
+</div>
+<div class="mb-4">
+    <label for="CodePostal" class="block text-gray-700 text-sm font-bold mb-2">Code Postal :</label>
+    {{ form_widget(form.CodePostal, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'}}) }}
+</div>
+<div class="mb-4">
+    <label for="ville" class="block text-gray-700 text-sm font-bold mb-2">Ville :</label>
+    {{ form_widget(form.ville, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'}}) }}
+</div>
+<div class="mb-4">
+    <label for="photo" class="block text-gray-700 text-sm font-bold mb-2">Photo de Profil :</label>
+    {{ form_widget(form.photo, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'}}) }}
+</div>
+<button type="submit" class="bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600 text-white py-2 px-4 rounded-full">Ajouter</button>
+
+{{ form_end(form) }}
+
+
+{% endblock %}
