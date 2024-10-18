@@ -39,6 +39,14 @@ class CarteServices implements CarteServicesInterface
     {
         return $this->session->get('cart', []);
     }
+
+
+    public function clearCart()
+    {
+        $this->session->set('cart', []);
+    }
+
+
     public function getTotal()
     {
         $cart = $this->getCart();

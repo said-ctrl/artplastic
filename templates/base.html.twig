@@ -24,40 +24,64 @@
 		{% endblock %}
 
 
-		<body class="bg-gray-900 text-white text-2xl">
 
-			<nav class="bg-gray-800 p-4">
-				<div class="container mx-auto flex justify-between items-center">
-					<a href="{{ path('app_menu') }}" class="text-2xl font-bold ">
-						<img src="{{asset('images/logoart.png')}}" class="h-16 w-16" alt="logo">
-					</a>
-					<div class="flex items-center space-x-4">
-						<a href="{{ path('app_menu') }}" class="hover:text-green-400">Accueil</a>
-						<a href="{{ path('app_produits') }}" class="hover:text-green-400">Produits</a>
-						{% if app.user %}
-							{% if is_granted('ROLE_ADMIN') %}
-								<a href="{{ path('admin_dashboard') }}" class="hover:text-green-400">Tableau de bord Admin</a>
-							{% endif %}
-							<a href="{{ path('app_logout') }}" class="hover:text-green-400">deconnexion</a>
-							<a href="{{ path('app_profil') }}" class="hover:text-green-400">profil</a>
+			<body class="bg-gray-900 text-white text-2xl">
+    <nav class="bg-gray-800 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="{{ path('app_menu') }}" class="text-2xl font-bold">
+                <img src="{{ asset('images/logoart.png') }}" class="h-16 w-16" alt="logo">
+            </a>
+            <div class="block lg:hidden">
+                <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-200 border-gray-400 hover:text-white hover:border-white">
+                    <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <title>Menu</title>
+                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="hidden lg:flex lg:items-center lg:w-auto" id="nav-content">
+                <div class="flex flex-col lg:flex-row items-center space-y-4 lg:space-y-0 lg:space-x-4">
+                    <a href="{{ path('app_menu') }}" class="hover:text-green-400">Accueil</a>
+                    <a href="{{ path('app_produits') }}" class="hover:text-green-400">Produits</a>
+                    {% if app.user %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('admin_dashboard') }}" class="hover:text-green-400">Tableau de bord Admin</a>
+                        {% endif %}
+                        <a href="{{ path('app_logout') }}" class="hover:text-green-400">Déconnexion</a>
+                        <a href="{{ path('app_profil') }}" class="hover:text-green-400">Profil</a>
+                    {% else %}
+                        <a href="{{ path('app_register') }}" class="hover:text-green-400">Inscription</a>
+                        <a href="{{ path('app_login') }}" class="hover:text-green-400">Connexion</a>
+                    {% endif %}
+                    <a href="{{ path('cart_show') }}" class="hover:text-green-400">Panier</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
 
-						{% else %}
+				{% block body %}{% endblock %}
+				<script>
+					document.getElementById('nav-toggle').onclick = function () {
+var navContent = document.getElementById('nav-content');
+if (navContent.classList.contains('hidden')) {
+navContent.classList.remove('hidden');
+} else {
+navContent.classList.add('hidden');
+}
+};
+				</script>
 
-							<a href="{{ path('app_register') }}" class="hover:text-green-400">Inscription</a>
-							<a href="{{ path('app_login') }}" class="hover:text-green-400">Connexion</a>
-						{% endif %}
-						<a href="{{ path('cart_show') }}" class="hover:text-green-400">Panier</a>
+
+				<footer class="bg-gray-800 text-center p-4 mt-10 ">
+				<div class="space-y-4">
+					<a href="{{ path('cgu') }}" class="block hover:text-green-400">Conditions Générales d'Utilisation</a>
+					<a href="{{ path('cgv') }}" class="block hover:text-green-400">Conditions Générales de Vente</a>
+
+					<p>&copy; 2024 Art des Déchets. Tous droits réservés.</p>
 					</div>
-				</div>
-			</nav>
-
-			{% block body %}{% endblock %}
-
-
-			<footer class="bg-gray-800 text-center p-4 mt-10">
-				<p>&copy; 2024 Art des Déchets. Tous droits réservés.</p>
-			</footer>
+				</footer>
+			</body>
 		</body>
 	</head>
-</html></body></head></html>
+</html>

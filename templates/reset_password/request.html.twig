@@ -9,7 +9,8 @@
     <h1>Reset your password</h1>
 
     {{ form_start(requestForm) }}
-        {{ form_row(requestForm.email) }}
+        {{ form_row(requestForm.email, {'attr': {'class': 'w-full p-2 bg-gray-700 border border-gray-600 rounded text-white placeholder-gray-400'},
+                'label_attr': {'class': 'text-sm font-semibold'}} ) }}
         <div>
             <small>
                 Enter your email address, and we will send you a

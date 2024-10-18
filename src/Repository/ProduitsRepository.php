@@ -15,6 +15,17 @@ class ProduitsRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Produits::class);
     }
+    public function search($query)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.nom LIKE :query')
+            ->orWhere("p.description LIKE :querys")
+            ->setParameter('query', "%$query%")
+            ->setParameter('querys', "%$query%")
+            ->getQuery()
+            ->getResult();
+    }
+}
 
     //    /**
     //     * @return Produits[] Returns an array of Produits objects
@@ -40,4 +51,4 @@ class ProduitsRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
-}
+

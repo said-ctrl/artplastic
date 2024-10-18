@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Comments;
 use App\Entity\Produits;
 use App\Form\CommentaireType;
+use App\Form\RechercheType;
+use App\Repository\ProduitsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,15 +15,28 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ProduitsController extends AbstractController
 {
+
+    public function __construct(
+        readonly private ProduitsRepository $produitsRepository,
+    ){}
+
     #[Route('/produits', name: 'app_produits')]
 
-    public function afficheproduits(EntityManagerInterface $entity): Response
+    public function afficheproduits(EntityManagerInterface $entity, Request $request): Response
     {
         $produits = $entity->getRepository(Produits::class)->findAll();
+
+        $form = $this->createForm(RechercheType::class);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $produits = $this->produitsRepository->search($form->get("query")->getData());
+        }
 
         return $this->render('produits/index.html.twig', [
             'controller_name' => 'MainController',
             'produit' => $produits,
+            "form"=>$form,
         ]);
     }
     #[Route('/prod/{id}', name: 'app_prod')]

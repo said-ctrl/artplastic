@@ -15,4 +15,18 @@ class MenuController extends AbstractController
             'controller_name' => 'MenuController',
         ]);
     }
+    #[Route("/cgu", name:"cgu")]
+    
+    public function cgu(): Response
+    {
+        return $this->render('cgu.html.twig');
+    }
+
+    
+    #[Route("/cgv", name:"cgv")]
+   
+    public function cgv(): Response
+    {
+        return $this->render('cgv.html.twig');
+    }
 }

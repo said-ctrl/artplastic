@@ -2,5 +2,5 @@
 namespace App\Services;
 
 interface StripeServicesInterface{
-    public function payestripe();
+    public function payestripe($tx);
 }

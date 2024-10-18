@@ -16,13 +16,13 @@ class StripeServices implements StripeServicesInterface{
 
     ) {}
 
-    public function payestripe(){
+    public function payestripe($tx){
             $session = $this->requestStack->getSession();
             $panier = $session->get('cart',[]);
             $stripe = new \Stripe\StripeClient($this->secret_key);
     
             $product = $stripe->checkout->sessions->create([
-                'success_url' => $this->urlGeneratorInterface->generate("app_success", [], UrlGeneratorInterface::ABSOLUTE_URL),
+                'success_url' => $this->urlGeneratorInterface->generate("app_success", ["tx"=>$tx], UrlGeneratorInterface::ABSOLUTE_URL),
                 'line_items' => [
                     $this->Loop($panier),
                 ],
@@ -31,6 +31,7 @@ class StripeServices implements StripeServicesInterface{
             return $product->url;
         }
         private function Loop($panier){
+            
             foreach($panier as $id => $qty){
                 $product = $this->produitsRepository->findOneBy(['id' => $id]);
                 $data["price_data"]["unit_amount"] = $product->getPrix() * 100;
