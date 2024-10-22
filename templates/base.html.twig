@@ -45,7 +45,7 @@
                     <a href="{{ path('app_produits') }}" class="hover:text-green-400">Produits</a>
                     {% if app.user %}
                         {% if is_granted('ROLE_ADMIN') %}
-                            <a href="{{ path('admin_dashboard') }}" class="hover:text-green-400">Tableau de bord Admin</a>
+                            <a href="{{ path('admin') }}" class="hover:text-green-400">Tableau de bord</a>
                         {% endif %}
                         <a href="{{ path('app_logout') }}" class="hover:text-green-400">Déconnexion</a>
                         <a href="{{ path('app_profil') }}" class="hover:text-green-400">Profil</a>
@@ -74,11 +74,10 @@ navContent.classList.add('hidden');
 
 
 				<footer class="bg-gray-800 text-center p-4 mt-10 ">
-				<div class="space-y-4">
+				<div class=" flex justify-between">
 					<a href="{{ path('cgu') }}" class="block hover:text-green-400">Conditions Générales d'Utilisation</a>
-					<a href="{{ path('cgv') }}" class="block hover:text-green-400">Conditions Générales de Vente</a>
-
 					<p>&copy; 2024 Art des Déchets. Tous droits réservés.</p>
+					<a href="{{ path('cgv') }}" class="block hover:text-green-400">Conditions Générales de Vente</a>
 					</div>
 				</footer>
 			</body>
