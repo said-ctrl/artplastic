@@ -47,7 +47,14 @@ class PaymentController extends AbstractController
             $response->send(),
         ]);
     }
-    
+    #[Route('/cancel', name: 'app_cancel')]
+
+    public function cancel()
+    {
+        
+        return $this->render('payment/cancel.html.twig');
+    }
+ 
   
 }
 

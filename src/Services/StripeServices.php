@@ -23,6 +23,7 @@ class StripeServices implements StripeServicesInterface{
     
             $product = $stripe->checkout->sessions->create([
                 'success_url' => $this->urlGeneratorInterface->generate("app_success", ["tx"=>$tx], UrlGeneratorInterface::ABSOLUTE_URL),
+                'cancel_url' => $this->urlGeneratorInterface->generate("app_cancel", [], UrlGeneratorInterface::ABSOLUTE_URL),
                 'line_items' => [
                     $this->Loop($panier),
                 ],

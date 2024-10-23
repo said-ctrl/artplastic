@@ -22,47 +22,132 @@
 		{% block javascripts %}
 			{% block importmap %}{% endblock %}
 		{% endblock %}
+		<style>
+			.bod {
+				margin-top: 0;
+				padding: 0;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100vh;
+				background: #112c38;
+			}
+
+			.navbar ul {
+				margin: 0;
+				padding: 0;
+				display: flex;
+			}
+
+			.navbar ul li {
+				list-style: none;
+				margin: 0 20px;
+				transition: 0.5s;
+			}
+
+			.navbar ul li a {
+				display: block;
+				position: relative;
+				text-decoration: none;
+				padding: 5px;
+				font-size: 18px;
+				font-family: sans-serif;
+				color: #fff;
+				text-transform: uppercase;
+				transition: 0.5s;
+			}
+
+			.navbar ul:hover li a {
+				transform: scale(1.5);
+				opacity: 0.2;
+				filter: blur(5px);
+			}
+
+			.navbar ul li a:hover {
+				transform: scale(2);
+				opacity: 1;
+				filter: blur(0);
+				text-decoration: none;
+				color: #fff;
+			}
+
+			.navbar ul li a:before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: #4ade80;
+				transition: 0.5s;
+				transform-origin: right;
+				transform: scaleX(0);
+				z-index: -1;
+			}
+
+			.navbar ul li a:hover:before {
+				transition: transform 0.5s;
+				transform-origin: left;
+				transform: scaleX(1);
+			}
+		</style>
+	</head>
+	<body class="bg-gray-900 text-white text-2xl">
+		<nav class="navbar bg-gray-800 p-4">
+			<div class="container mx-auto flex justify-between items-center">
+				<a href="{{ path('app_menu') }}" class="text-2xl font-bold">
+					<img src="{{ asset('images/logoart.png') }}" class="h-16 w-16" alt="logo">
+				</a>
+				<div class="block lg:hidden">
+					<button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-200 border-gray-400 hover:text-white hover:border-white">
+						<svg class="fill-current h-3 w-3" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+							<title>Menu</title>
+							<path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
+						</svg>
+					</button>
+				</div>
+				<div class="hidden lg:flex lg:items-center lg:w-auto" id="nav-content">
+					<ul class="flex flex-col lg:flex-row items-center space-y-4 lg:space-y-0 lg:space-x-4">
+						<li>
+							<a href="{{ path('app_menu') }}">Accueil</a>
+						</li>
+						<li>
+							<a href="{{ path('app_produits') }}">Produits</a>
+						</li>
+						{% if app.user %}
+							{% if is_granted('ROLE_ADMIN') %}
+								<li>
+									<a href="{{ path('admin') }}">Tableau de bord</a>
+								</li>
+							{% endif %}
+							<li>
+								<a href="{{ path('app_logout') }}">Déconnexion</a>
+							</li>
+							<li>
+								<a href="{{ path('app_profil') }}">Profil</a>
+							</li>
+						{% else %}
+							<li>
+								<a href="{{ path('app_register') }}">Inscription</a>
+							</li>
+							<li>
+								<a href="{{ path('app_login') }}">Connexion</a>
+							</li>
+						{% endif %}
+						<li>
+							<a href="{{ path('cart_show') }}">Panier</a>
+						</li>
+
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</body>
 
 
-
-			<body class="bg-gray-900 text-white text-2xl">
-    <nav class="bg-gray-800 p-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="{{ path('app_menu') }}" class="text-2xl font-bold">
-                <img src="{{ asset('images/logoart.png') }}" class="h-16 w-16" alt="logo">
-            </a>
-            <div class="block lg:hidden">
-                <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-200 border-gray-400 hover:text-white hover:border-white">
-                    <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <title>Menu</title>
-                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
-                    </svg>
-                </button>
-            </div>
-            <div class="hidden lg:flex lg:items-center lg:w-auto" id="nav-content">
-                <div class="flex flex-col lg:flex-row items-center space-y-4 lg:space-y-0 lg:space-x-4">
-                    <a href="{{ path('app_menu') }}" class="hover:text-green-400">Accueil</a>
-                    <a href="{{ path('app_produits') }}" class="hover:text-green-400">Produits</a>
-                    {% if app.user %}
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <a href="{{ path('admin') }}" class="hover:text-green-400">Tableau de bord</a>
-                        {% endif %}
-                        <a href="{{ path('app_logout') }}" class="hover:text-green-400">Déconnexion</a>
-                        <a href="{{ path('app_profil') }}" class="hover:text-green-400">Profil</a>
-                    {% else %}
-                        <a href="{{ path('app_register') }}" class="hover:text-green-400">Inscription</a>
-                        <a href="{{ path('app_login') }}" class="hover:text-green-400">Connexion</a>
-                    {% endif %}
-                    <a href="{{ path('cart_show') }}" class="hover:text-green-400">Panier</a>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-
-				{% block body %}{% endblock %}
-				<script>
-					document.getElementById('nav-toggle').onclick = function () {
+	{% block body %}{% endblock %}
+	<script>
+		document.getElementById('nav-toggle').onclick = function () {
 var navContent = document.getElementById('nav-content');
 if (navContent.classList.contains('hidden')) {
 navContent.classList.remove('hidden');
@@ -70,17 +155,25 @@ navContent.classList.remove('hidden');
 navContent.classList.add('hidden');
 }
 };
-				</script>
+	</script>
+	<section class="mt-10">
+		<h2 class="text-3xl font-semibold text-center">Nos Partenaires</h2>
+		<div class="flex justify-center mt-4 space-x-8">
+			<img src="{{ asset('images/recy.webp') }}" alt="Partenaire 2" class="h-16">
+			<img src="{{ asset('images/gouv.png') }}" alt="Partenaire 1" class="h-16">
+			<img src="{{ asset('images/ue.jpg') }}" alt="Partenaire 3" class="h-16">
+
+		</div>
+	</section>
 
 
-				<footer class="bg-gray-800 text-center p-4 mt-10 ">
-				<div class=" flex justify-between">
-					<a href="{{ path('cgu') }}" class="block hover:text-green-400">Conditions Générales d'Utilisation</a>
-					<p>&copy; 2024 Art des Déchets. Tous droits réservés.</p>
-					<a href="{{ path('cgv') }}" class="block hover:text-green-400">Conditions Générales de Vente</a>
-					</div>
-				</footer>
-			</body>
-		</body>
-	</head>
-</html>
+	<footer class="bg-gray-800 text-center p-4 mt-10 ">
+		<div class=" flex justify-between">
+			<a href="{{ path('cgu') }}" class="block hover:text-green-400 ml-4">Conditions Générales d'Utilisation</a>
+			<a href="{{ path('contact') }}" class="block hover:text-green-400 ml-4">Contactez-Nous</a>
+
+			<p>&copy; 2024 Art des Déchets. Tous droits réservés.</p>
+			<a href="{{ path('cgv') }}" class="block hover:text-green-400 mr-4">Conditions Générales de Vente</a>
+		</div>
+	</footer>
+</html></body>
