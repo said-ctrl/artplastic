@@ -15,8 +15,9 @@ class MenuController extends AbstractController
     #[Route('/', name: 'app_menu')]
     public function index(): Response
     {
+        $visite = 'https://www.klapty.com/tour/tunnel/ftP0jLG78w';
         return $this->render('menu/index.html.twig', [
-            'controller_name' => 'MenuController',
+           ' https://www.klapty.com/tour/tunnel/ftP0jLG78w' => $visite,
         ]);
     }
     #[Route("/cgu", name:"cgu")]
